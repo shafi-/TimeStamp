@@ -20,7 +20,7 @@ export default class Home extends Component {
   entryTime() {
     let dateTime = new Date();
     let date = moment(dateTime).format('YYYY-MM-DD');
-    let time = moment(dateTime).format('HH mm');
+    let time = moment(dateTime).format('HH:mm');
     // console.log(time);
     let entryTime = { entryTime: time };
     Alert.alert(
