@@ -37,35 +37,46 @@ export default class ShowAll extends React.Component {
             paddingVertical: 10,
             justifyContent: 'space-between',
           }}>
-          <Text style={{ flex: 2.5 }}>Date</Text>
-          <Text style={{ flex: 2.25 }}>Entry time</Text>
+          <Text style={{ flex: 3 }}>Date</Text>
+          <Text style={{ flex: 2 }}>Entry time</Text>
           <Text style={{ flex: 2 }}>Leave time</Text>
           <Text style={{ flex: 3 }}>Working hour</Text>
         </View>
         {data.map((item, index) => {
-          var timeStart = moment(item.date + item.time.entryTime, "YYYY-MM-DD hh:mm").format("ddd MMM DD YYYY HH:mm:ss Z")
-          var timeEnd = moment(item.date + item.time.leaveTime, "YYYY-MM-DD hh:mm").format("ddd MMM DD YYYY HH:mm:ss Z")
+          var timeStart = moment(
+            item.date + item.time.entryTime,
+            'YYYY-MM-DD hh:mm',
+          ).format('ddd MMM DD YYYY HH:mm:ss Z');
+          var timeEnd = moment(
+            item.date + item.time.leaveTime,
+            'YYYY-MM-DD hh:mm',
+          ).format('ddd MMM DD YYYY HH:mm:ss Z');
 
           // console.log(timeStart.getHours(), timeEnd.getHours());
 
-          var hourDiff = moment(timeEnd).diff(timeStart, 'hours')
-          var minDiff = moment(timeEnd).diff(timeStart, 'minutes')
+          var hourDiff = moment(timeEnd).diff(timeStart, 'hours');
+          var minDiff = moment(timeEnd).diff(timeStart, 'minutes');
           return (
             <View
               key={index}
               style={{
                 flexDirection: 'row',
-                backgroundColor: index%2 ==0 ? '#ECEFF1' : '#E0E0E0',
+                backgroundColor: index % 2 == 0 ? '#ECEFF1' : '#E0E0E0',
                 borderTopWidth: 0,
                 padding: 5,
                 paddingVertical: 10,
                 marginHorizontal: 10,
                 justifyContent: 'space-between',
               }}>
-              <Text style={{ flex: 2.5 }}>{item.date}</Text>
-              <Text style={{ flex: 2.25 }}>{item.time.entryTime}</Text>
+              <Text style={{ flex: 3 }}>{item.date}</Text>
+              <Text style={{ flex: 2 }}>{item.time.entryTime}</Text>
               <Text style={{ flex: 2 }}>{item.time.leaveTime}</Text>
-            <Text style={{ flex: 3 }}>{hourDiff} Hours {minDiff} minutes</Text>
+              {!!item.time.leaveTime && (
+                <Text style={{ flex: 3 }}>
+                  {hourDiff} Hours {minDiff} minutes
+                </Text>
+              )}
+              {!item.time.leaveTime && <View style={{flex: 3}} />}
             </View>
           );
         })}
