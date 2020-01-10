@@ -54,8 +54,10 @@ export default class ShowAll extends React.Component {
 
           // console.log(timeStart.getHours(), timeEnd.getHours());
 
-          var hourDiff = moment(timeEnd).diff(timeStart, 'hours');
+          // var hourDiff = moment(timeEnd).diff(timeStart, 'hours');
           var minDiff = moment(timeEnd).diff(timeStart, 'minutes');
+          var hourDiff = Math.floor(minDiff / 60);
+          minDiff = minDiff - hourDiff * 60;
           return (
             <View
               key={index}
